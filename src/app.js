@@ -8,7 +8,9 @@ const path = require("path");
 
 
 //connection
-// require("../db/conn");
+require("../db/conn");
+
+
 
 app.use(express.json());
 
