@@ -9,7 +9,7 @@ const Navbar = () => {
       <div id="navSection">
         <nav className="navbar navbar-expand-md navbar-dark  " id="navStyle">
           <NavLink exact className="navbar-brand" to="/">
-            Navbar
+            JM Knowledge
           </NavLink>
           <button
             className="navbar-toggler"
@@ -31,26 +31,36 @@ const Navbar = () => {
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link navStyle"
-                  activeClassName="activeLink"
-                  to="/about"
-                >
-                  About
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link navStyle"
-                  activeClassName="activeLink"
-                  to="/contact"
-                >
-                  Contact
-                </NavLink>
-              </li>
+
               {state ? (
                 <>
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link navStyle"
+                      activeClassName="activeLink"
+                      to="/about"
+                    >
+                      About
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link navStyle"
+                      activeClassName="activeLink"
+                      to="/add_post"
+                    >
+                      Add Post
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link navStyle"
+                      activeClassName="activeLink"
+                      to="/contact"
+                    >
+                      Contact
+                    </NavLink>
+                  </li>
                   <li className="nav-item">
                     <NavLink
                       className="nav-link navStyle"

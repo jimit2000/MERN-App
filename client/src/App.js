@@ -1,8 +1,6 @@
 import React, { useReducer, createContext, useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
-
-
 import Home from "./components/Home";
 import About from "./components/About";
 import Contact from "./components/Contact";
@@ -14,6 +12,9 @@ import Logout from "./components/Logout";
 import EditProfile from "./components/EditProfile";
 
 import MainLoading from "./Loader/MainLoading";
+import ViewInfo from "./components/ViewInfo";
+import Footer from "./components/Footer";
+import AddPost from "./components/AddPost";
 
 const Routing = () => {
   return (
@@ -40,6 +41,12 @@ const Routing = () => {
         <Route exact path="/about/editprofile">
           <EditProfile />
         </Route>
+        <Route exact path="/view_info/:id">
+          <ViewInfo />
+        </Route>
+        <Route exact path="/add_post">
+          <AddPost />
+        </Route>
         <Route>
           <Error />
         </Route>
@@ -52,7 +59,7 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "user":
       return action.payload;
-    
+
     default:
       return state;
   }
@@ -75,7 +82,7 @@ const App = () => {
         credentials: "include",
       });
       // const data = await res.json();
-    
+
       if (res.status === 200) {
         dispatch({ type: "user", payload: true });
       } else {
@@ -89,7 +96,7 @@ const App = () => {
 
   useEffect(() => {
     logoutUser();
-    
+
     setLoadState(false);
   }, []);
 
@@ -105,6 +112,7 @@ const App = () => {
           <Navbar />
 
           <Routing />
+          <Footer />
         </UserAuth.Provider>
       )}
     </>

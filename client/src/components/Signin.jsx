@@ -39,18 +39,19 @@ const Signin = () => {
       const resData = await data.json();
 
       if (data.status === 200) {
+        toast.success(resData.message);
 
-        console.log("Signing successfully");
-        // console.log(resData);
-        // alert("Signing successfully");
-        // alert(resData);
         dispatch({ type: "user", payload: true });
-        
-        history.push("/");
+        setLoading(false);
+
+        setTimeout(() => {
+          history.push("/");
+        }, 1500);
+
       } else {
         setLoading(false);
         // alert();
-          toast.error(resData.message);
+        toast.error(resData.message);
 
         // console.log("show  " + resData);
       }
@@ -63,7 +64,7 @@ const Signin = () => {
     <>
       <ToastContainer
         position="top-center"
-        autoClose={5000}
+        autoClose={1500}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -114,13 +115,17 @@ const Signin = () => {
                   </div>
 
                   {loading ? (
-                    <button className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary">
                       <span className="spinner-border spinner-border-sm"></span>
                       Signing..
                     </button>
                   ) : (
-                    <button onClick={formSubmit} className="btn btn-primary">
-                      Submit
+                    <button
+                      type="submit"
+                      onClick={formSubmit}
+                      className="btn btn-primary"
+                    >
+                      Signin
                     </button>
                   )}
                 </form>

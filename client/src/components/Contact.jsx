@@ -56,6 +56,7 @@ const Contact = () => {
       const res = await fetch("/contact", {
         method: "post",
         headers: {
+          Accept:"application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
@@ -72,13 +73,12 @@ const Contact = () => {
       } else {
         console.log(data);
 
-        alert(`${res.status} 
-          ${res.statusText}`);
+        alert(data.message);
       }
     } catch (err) {
       console.log(err);
     }
-  };
+  };  
 
   return (
     <>
@@ -113,7 +113,7 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className="container shadow m-5 p-5 mx-auto">
+      <div className="container shadow m-5 p-5 mx-auto contact_shadow">
         <form method="post">
           <div className="form-row">
             <div className="form-group col-md-4 col-12">
@@ -182,7 +182,7 @@ const Contact = () => {
       </div>
       <ToastContainer
         position="top-center"
-        autoClose={4000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

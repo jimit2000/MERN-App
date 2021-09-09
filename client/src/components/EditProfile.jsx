@@ -97,10 +97,10 @@ const EditProfile = () => {
             draggable
             pauseOnHover
           />
-          <div className="aboutPage d-flex justify-content-center align-items-center">
+          <div className="main_content d-flex justify-content-center align-items-center">
             <div className="container-fluid  ">
               <div className="row d-flex justify-content-center align-items-center ">
-                <div className="col-11 col-md-6 shadow p-4">
+                <div className="col-11 col-md-6 shadow p-4 editProfile">
                   <h1 className="text-center font-weight-bold">Edit Profile</h1>
                   <form method="post">
                     <div className="form-group">

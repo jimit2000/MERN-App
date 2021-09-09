@@ -1,10 +1,12 @@
-import React, { useState, } from "react";
+import React, { useState } from "react";
 // import { MdFormatListBulleted } from "react-icons/md";
 import { useHistory } from "react-router-dom";
 import logo from "../webdev.svg";
+import { ToastContainer, toast } from "react-toastify";
+
 
 const Signup = () => {
-  const [signup,setSignup] = useState(false);
+  const [signup, setSignup] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -27,26 +29,23 @@ const Signup = () => {
       const data = await fetch("/signup", {
         method: "POST",
         headers: {
+          Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
       });
-
+      const resData = await data.json();
       if (data.status === 201) {
-        const resData = await data.json();
         alert("Register successfully");
         console.log(data);
         console.log(resData);
         setSignup(false);
         history.push("/signin");
       } else {
-        let resData = await data.json();
+        
+        toast.error(resData.message);
 
-        alert(`There is Error  
-Error code : ${data.status} 
-Error Info : ${data.statusText}
-${resData}`);
-          setSignup(false);
+        setSignup(false);
 
         console.log("show  " + resData);
       }
@@ -58,6 +57,17 @@ ${resData}`);
 
   return (
     <>
+     <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="signin_div">
         <div className="container mx-auto" id="signin_form">
           <div className="row">
@@ -143,17 +153,20 @@ ${resData}`);
                     />
                   </div>
 
-                  {signup ?     <button className="btn btn-primary">
+                  {signup ? (
+                    <button type="submit" className="btn btn-primary">
                       <span className="spinner-border spinner-border-sm"></span>
                       signup...
-                    </button>:
-                  <button
-                    type="submit"
-                    onClick={formSubmit}
-                    className="btn btn-primary"
-                  >
-                    Submit
-                  </button>}
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      onClick={formSubmit}
+                      className="btn btn-primary"
+                    >
+                      Submit
+                    </button>
+                  )}
                 </form>
               </div>
             </div>
