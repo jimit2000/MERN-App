@@ -155,7 +155,8 @@ rout.post("/editprofile", auth, async (req, res) => {
 });
 
 
-const uploadPath = path.join(__dirname,"../client/public/");
+const uploadPath = path.join(__dirname,"../client/public/uploadFile");
+console.log(uploadPath);
 
 const storage = multer.diskStorage({
   destination: function (req, file, next) {
