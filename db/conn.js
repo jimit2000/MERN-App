@@ -12,6 +12,17 @@ mongoose
   .then(() => console.log("connected"))
   .catch((err) => console.log(err));
 
+  // mongodb://127.0.0.1:27017
+
+  // mongoose
+  // .connect("mongodb://127.0.0.1:27017/firstapp", {
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true,
+  //   useCreateIndex: true,
+  //   useFindAndModify: false,
+  // })
+  // .then(() => console.log("connected"))
+  // .catch((err) => console.log(err))
 
 // const { MongoClient } = require('mongodb');
 // const uri = "mongodb+srv://jimitmewada:@17JimitMewada@cluster0.zr3ot.mongodb.net/firstapp?retryWrites=true&w=majority";
