@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import logo from "../webdev.svg";
 import { ToastContainer, toast } from "react-toastify";
 
-
 const Signup = () => {
   const [signup, setSignup] = useState(false);
   const [userData, setUserData] = useState({
@@ -37,17 +36,12 @@ const Signup = () => {
       const resData = await data.json();
       if (data.status === 201) {
         alert("Register successfully");
-        console.log(data);
-        console.log(resData);
         setSignup(false);
         history.push("/signin");
       } else {
-        
         toast.error(resData.message);
 
         setSignup(false);
-
-        console.log("show  " + resData);
       }
     } catch (err) {
       console.log(err);
@@ -57,7 +51,7 @@ const Signup = () => {
 
   return (
     <>
-     <ToastContainer
+      <ToastContainer
         position="top-center"
         autoClose={3000}
         hideProgressBar={false}

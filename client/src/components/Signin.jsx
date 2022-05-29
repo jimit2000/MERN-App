@@ -25,7 +25,6 @@ const Signin = () => {
 
   const formSubmit = async (e) => {
     e.preventDefault();
-    console.log(loginData);
     try {
       setLoading(true);
       const data = await fetch("/signin", {
@@ -47,13 +46,9 @@ const Signin = () => {
         setTimeout(() => {
           history.push("/");
         }, 1500);
-
       } else {
         setLoading(false);
-        // alert();
         toast.error(resData.message);
-
-        // console.log("show  " + resData);
       }
     } catch (err) {
       console.log(err);

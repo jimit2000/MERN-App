@@ -19,11 +19,10 @@ const ViewInfo = () => {
           const viewData = data.find((ele) => {
             return ele._id === id;
           });
-          console.log(viewData);
           setViewData(viewData);
           setData(viewData.topicdata);
           setShowCommentData(viewData.comments);
-        }else{
+        } else {
           throw new Error("Error ");
         }
       } catch (err) {
