@@ -19,13 +19,11 @@ const About = () => {
         },
         credentials: "include",
       });
-      // console.log(res1);
 
       const res1 = await res.json();
 
       //  alert(res.status);
       if (res.status === 200) {
-        console.log(res1);
         // alert(res.statusText);
         setUserData(res1);
         setLoading(false);
@@ -100,16 +98,14 @@ const About = () => {
                 <p>Instagram</p>
                 <p>{userData.name}</p>
                 <p>{userData.work}</p>
-               
               </div>
               <div className="col-md-8 col-12 mt-3  order-0 order-md-1">
                 <div className="tab-content">
                   <div id="About" className="container tab-pane active">
-                
                     <table className="table">
                       <tbody>
                         <tr>
-                          <td>Userid  </td>
+                          <td>Userid </td>
                           <td>{userData._id}</td>
                         </tr>
                         <tr>

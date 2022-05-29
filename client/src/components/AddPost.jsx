@@ -37,15 +37,11 @@ const AddPost = () => {
     setText([...text, da1]);
 
     const td = document.querySelector(".topicData");
-    console.log(td);
   };
 
   const changeInput = (e) => {
     const index = e.target.getAttribute("data-index");
     const { name, value } = e.target;
-    console.log(postData[index]);
-    console.log(value);
-    console.log(index);
 
     setPostData((prevData) => {
       let data = [...prevData];
@@ -76,7 +72,6 @@ const AddPost = () => {
       formdata.append("imageName", imageName);
       const res = await axios.post("/add_post", formdata);
 
-      console.log(res);
       if (res.status === 201) {
         history.push("/");
       } else {

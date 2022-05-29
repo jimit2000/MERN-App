@@ -5,14 +5,12 @@ const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 
-
 const User = require("../model/users");
 const auth = require("../middleware/auth");
 const { Router } = require("express");
 const path = require("path");
 
 rout.post("/signup", async (req, res) => {
-  console.log(req.body);
   const { name, email, phone, work, password, conpassword } = req.body;
 
   if (!name || !email || !phone || !password || !conpassword || !work) {
@@ -50,7 +48,6 @@ rout.post("/signin", async (req, res) => {
     res.status(400).send({ message: "Fill the data" });
   }
 
-  console.log(`${email} and ${password}`);
   try {
     const data = await User.findOne({ email });
     !data && res.status(422).send({ message: "Invalid Details" });
@@ -73,8 +70,6 @@ rout.post("/signin", async (req, res) => {
 });
 
 rout.get("/aboutPage", auth, (req, res) => {
-  console.log(req.isUser);
-
   res.status(200).send(req.isUser);
 });
 
@@ -128,7 +123,6 @@ rout.post("/editprofile", auth, async (req, res) => {
     const { name, email, phone, work, id } = req.body;
     const isEmailValid = await User.findOne({ email });
     if (isEmailValid) {
-      console.log(isEmailValid._id.toString() === id.toString());
       if (isEmailValid._id.toString() === id.toString()) {
         const resUser = await User.updateOne(
           { _id: id },
@@ -145,7 +139,6 @@ rout.post("/editprofile", auth, async (req, res) => {
         { _id: id },
         { $set: { name: name, email: email, phone: phone, work: work } }
       );
-      console.log("res" + resUser);
 
       res.status(200).send({ message: "data updated" });
     }
@@ -154,13 +147,11 @@ rout.post("/editprofile", auth, async (req, res) => {
   }
 });
 
-
-const uploadPath = path.join(__dirname,"../client/public/uploadFile");
-console.log(uploadPath);
+const uploadPath = path.join(__dirname, "../client/public/uploadFile");
 
 const storage = multer.diskStorage({
   destination: function (req, file, next) {
-    next(null,uploadPath);
+    next(null, uploadPath);
   },
   filename: function (req, file, next) {
     next(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
@@ -180,17 +171,11 @@ const upload = multer({ storage, fileFilter });
 
 rout.post("/add_post", upload.single("imageName"), auth, async (req, res) => {
   try {
-    // console.log(req.file.originalname);
-
-    // console.log(req.file.filename);
     const topicname = req.body.topicname;
     const imageName = req.file.filename;
-    console.log(req.body.data);
     const data = req.body.data;
 
     const postdata = await req.body.data.split("$%$^");
-
-    //  console.log(topicname);
 
     req.isUser.post = await req.isUser.post.concat({
       topicname: topicname,
@@ -207,7 +192,6 @@ rout.post("/add_post", upload.single("imageName"), auth, async (req, res) => {
 rout.get("/getHomeData", async (req, res) => {
   try {
     const data = await User.find({}, { post: 1 });
-    console.log(data);
     res.status(200).send(data);
   } catch (err) {
     console.log(err);
@@ -219,7 +203,6 @@ rout.get("/viewinfo", async (req, res) => {
     const { id } = req.query;
     const data = await User.find({ "post._id": id }, { post: 1 });
     res.status(200).send(data);
-    console.log(data);
   } catch (err) {
     console.log(err);
   }
@@ -228,7 +211,6 @@ rout.get("/viewinfo", async (req, res) => {
 rout.post("/viewinfo", async (req, res) => {
   try {
     const { commentData, id } = req.body;
-    console.log(id);
 
     const data = await User.findOne({ "post._id": id }, { post: 1 });
 
